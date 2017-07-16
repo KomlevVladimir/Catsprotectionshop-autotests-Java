@@ -12,6 +12,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ApplicationManager {
     private WebDriver wd;
 
@@ -58,7 +61,7 @@ public class ApplicationManager {
         viewItemPage.setQuantity(itemData.getQuantity());
     }
 
-    public void addToCartFromItemPage()
+    public void addToCart()
     {
         viewItemPage.addToCart();
     }
@@ -68,14 +71,13 @@ public class ApplicationManager {
         return viewItemPage.getItem();
     }
 
-    public ItemData getItemFromCartPage()
-    {
-        return cartPage.getItem();
-    }
-
     public boolean isInTheCartPage()
     {
         return cartPage.shoppingCartTitle.getText().equals("Shopping Cart");
+    }
+
+    public List<ItemData> getItemsFromCartPage() {
+        return cartPage.getItems();
     }
 
 }
