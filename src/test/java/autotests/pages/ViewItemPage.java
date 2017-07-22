@@ -45,5 +45,12 @@ public class ViewItemPage extends BasePage {
         return new ItemData(null, itemName, quantity, price, ref);
     }
 
+    public boolean buttonAddToCartIsPresent() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class='button cart-button']")));
+        return isElementPresent(By.xpath("//input[@class='button cart-button']"));
+    }
+
+
+
 
 }

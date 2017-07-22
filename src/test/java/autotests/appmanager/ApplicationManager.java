@@ -54,7 +54,7 @@ public class ApplicationManager {
         wd.quit();
     }
 
-    public void ChooseItem(ItemData itemData)
+    public void chooseItem(ItemData itemData)
     {
         mainPage.open().chooseCategory(itemData.getItemCategory());
         categoryPage.gotToViewItemPage(itemData.getItemName());
@@ -71,7 +71,7 @@ public class ApplicationManager {
         return viewItemPage.getItem();
     }
 
-    public boolean isInTheCartPage()
+    public boolean isOnTheCartPage()
     {
         return cartPage.shoppingCartTitle.getText().equals("Shopping Cart");
     }
@@ -79,6 +79,34 @@ public class ApplicationManager {
     public List<ItemData> getItemsFromCartPage() {
         return cartPage.getItems();
     }
+
+    public void changeQuantityTo(String changedQuantity) {
+        cartPage.changeQuantity(changedQuantity);
+    }
+
+    public void updateCart() {
+        cartPage.buttonUpdate.click();
+    }
+
+    public void removeItem(ItemData item) {
+        cartPage.activateCheckboxToRemoveItem(item);
+        cartPage.buttonUpdate.click();
+    }
+
+    public ItemData getItemFromCartPageByName(String name) {
+        return cartPage.getItemByName(name);
+    }
+
+    public void continueShopping() {
+        cartPage.buttonContinueShopping.click();
+    }
+
+    public boolean isOnTheViewItemPage() {
+         return viewItemPage.buttonAddToCartIsPresent();
+    }
+
+
+
 
 }
 

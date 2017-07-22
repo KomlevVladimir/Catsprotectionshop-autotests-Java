@@ -16,6 +16,14 @@ public class ItemData {
         this.ref = ref;
     }
 
+    public ItemData(String itemName, String quantity, String price, String ref) {
+        this.itemCategory = null;
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.price = price;
+        this.ref = ref;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
