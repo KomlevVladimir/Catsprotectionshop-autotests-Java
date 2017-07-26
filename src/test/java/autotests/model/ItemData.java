@@ -7,23 +7,6 @@ public class ItemData {
     private String price;
     private String ref;
 
-
-    public ItemData(String itemCategory, String itemName, String quantity, String price, String ref) {
-        this.itemCategory = itemCategory;
-        this.itemName = itemName;
-        this.quantity = quantity;
-        this.price = price;
-        this.ref = ref;
-    }
-
-    public ItemData(String itemName, String quantity, String price, String ref) {
-        this.itemCategory = null;
-        this.itemName = itemName;
-        this.quantity = quantity;
-        this.price = price;
-        this.ref = ref;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,4 +60,30 @@ public class ItemData {
     }
 
     public String getRef() { return ref; }
+
+
+    public ItemData withName(String itemName) {
+        this.itemName = itemName;
+        return this;
+    }
+
+    public ItemData inCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
+        return this;
+    }
+
+    public ItemData withQuantity(String quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public ItemData withPrice(String price) {
+        this.price = price;
+        return this;
+    }
+
+    public ItemData withRef(String ref) {
+        this.ref = ref;
+        return this;
+    }
 }

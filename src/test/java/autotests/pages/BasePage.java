@@ -1,6 +1,7 @@
 package autotests.pages;
 
 
+import autotests.tests.TestBase;
 import org.openqa.selenium.*;
 
 import org.openqa.selenium.support.ui.ExpectedCondition;

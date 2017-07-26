@@ -11,9 +11,7 @@ public class AddItemsToCartTests extends TestBase {
 
     @Test
     public void addItemToCartTests() {
-        ItemData item = new ItemData(
-                "Gifts", "Kitten Mini Umbrella", "2", null, null
-        );
+        ItemData item = new ItemData().inCategory("Gifts").withName("Kitten Mini Umbrella").withQuantity("2");
         List<ItemData> itemsFromViewPage = new ArrayList<>();
         app.chooseItem(item);
         ItemData itemOnViewPage = app.getItemFromViewPage();
@@ -27,12 +25,9 @@ public class AddItemsToCartTests extends TestBase {
 
     @Test
     public void addFewItemsToCartTests() {
-        ItemData firstItem = new ItemData(
-                "Christmas", "Ginger Cat Bauble", "1", null, null
-        );
-        ItemData secondItem = new ItemData(
-                "Exclusives", "Cats Protection Sticky Notes Set", "3", null, null
-        );
+        ItemData firstItem = new ItemData().inCategory("Christmas").withName("Ginger Cat Bauble").withQuantity("1");
+        ItemData secondItem = new ItemData().inCategory("Exclusives")
+                .withName("Cats Protection Sticky Notes Set").withQuantity("3");
         List<ItemData> itemsFromViewPage = new ArrayList<ItemData>();
         app.chooseItem(firstItem);
         ItemData firstItemFromViewPage = app.getItemFromViewPage();

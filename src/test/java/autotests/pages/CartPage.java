@@ -12,7 +12,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.substring;
+
 public class CartPage extends BasePage {
+
     public CartPage(WebDriver wd) {
         super(wd);
         PageFactory.initElements(wd, this);
@@ -24,13 +27,11 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//form/div[@class='cartButtons']/input")
     public WebElement buttonUpdate;
 
-    @FindBy(xpath = "//tbody/tr[2]/td[@class='cart'][3]")
-    public WebElement cost;
-
     @FindBy(xpath = "//form/div[@class='cartButtons']/input[2]")
     public WebElement buttonContinueShopping;
 
-
+    @FindBy(xpath = "//div[@class='checkoutButtonArea']/input")
+    public WebElement buttonCheckoutNow;
 
     public List<ItemData> getItems() {
         List<ItemData> items = new ArrayList<ItemData>();
@@ -41,7 +42,7 @@ public class CartPage extends BasePage {
                     .getAttribute("value");
             String price = wd.findElement(By.xpath("//tbody/tr[" + i + "]/td[@class='cart'][2]")).getText();
             String ref = wd.findElements(By.xpath("//tbody/tr[" + i + "]/td/span")).get(1).getText();
-            ItemData item = new ItemData(null, itemName, quantity, price, ref);
+            ItemData item = new ItemData().withName(itemName).withQuantity(quantity).withPrice(price).withRef(ref);
             items.add(item);
         }
         return  items;
@@ -56,10 +57,17 @@ public class CartPage extends BasePage {
                         .getAttribute("value");
                 String price = wd.findElement(By.xpath("//tbody/tr[" + i + "]/td[@class='cart'][2]")).getText();
                 String ref = wd.findElements(By.xpath("//tbody/tr[" + i + "]/td/span")).get(1).getText();
-                return new ItemData(null, itemName, quantity, price, ref);
+                return new ItemData().withName(itemName).withQuantity(quantity).withPrice(price).withRef(ref);
             }
         }
         return null;
+    }
+
+    public String getCostByName(ItemData item) {
+        List<ItemData>itemsOnCartPage = getItems();
+        int index = itemsOnCartPage.indexOf(item) + 2;
+        return substring(wd.findElement(By.xpath("//tbody/tr[" + index + "]/td[3]")).getText(), 1);
+
     }
 
     public void activateCheckboxToRemoveItem(ItemData item) {
@@ -71,7 +79,6 @@ public class CartPage extends BasePage {
     public void changeQuantity(String quantity) {
         fillForm(By.xpath("//tbody/tr[2]/td/span/input"), quantity);
     }
-
 
 
 }

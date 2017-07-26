@@ -1,19 +1,19 @@
 package autotests.appmanager;
 
 
+import autotests.model.ClientData;
 import autotests.model.ItemData;
-import autotests.pages.CartPage;
-import autotests.pages.CategoryPage;
-import autotests.pages.MainPage;
-import autotests.pages.ViewItemPage;
+import autotests.pages.*;
+import autotests.tests.SagePayPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Float.parseFloat;
 
 public class ApplicationManager {
     private WebDriver wd;
@@ -24,6 +24,8 @@ public class ApplicationManager {
     private CategoryPage categoryPage;
     private ViewItemPage viewItemPage;
     private CartPage cartPage;
+    private CheckoutPage checkoutPage;
+    private SagePayPage sagePayPage;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -44,10 +46,13 @@ public class ApplicationManager {
                 break;
         }
 
+
         mainPage = new MainPage(wd);
         categoryPage = new CategoryPage(wd);
         viewItemPage = new ViewItemPage(wd);
         cartPage = new CartPage(wd);
+        checkoutPage = new CheckoutPage(wd);
+        sagePayPage = new SagePayPage(wd);
     }
 
     public void stop() {
@@ -88,12 +93,16 @@ public class ApplicationManager {
         cartPage.buttonUpdate.click();
     }
 
+    public float getCost(ItemData item) {
+        return parseFloat(cartPage.getCostByName(item));
+    }
+
     public void removeItem(ItemData item) {
         cartPage.activateCheckboxToRemoveItem(item);
         cartPage.buttonUpdate.click();
     }
 
-    public ItemData getItemFromCartPageByName(String name) {
+    public ItemData itemFromCartPageWithName(String name) {
         return cartPage.getItemByName(name);
     }
 
@@ -105,8 +114,45 @@ public class ApplicationManager {
          return viewItemPage.buttonAddToCartIsPresent();
     }
 
+    public void enterInvoiceAddress(ClientData clientData) {
+        cartPage.buttonCheckoutNow.click();
+        checkoutPage.enterInvoiceAddress(
+                clientData.getSalutation(), clientData.getFirstName(), clientData.getLastName(),
+                clientData.getAddress(), clientData.getCity(), clientData.getCountry(),
+                clientData.getPostCode(), clientData.getPhoneNumber(),
+                clientData.getEmailAddress(), clientData.getConfirmEmailAddress());
+    }
 
+    public void enterDeliveryAddress(ClientData clientData) {
+        checkoutPage.checkboxDeliveryAddress.click();
+        checkoutPage.enterDeliveryAddress(
+                clientData.getFirstName(), clientData.getLastName(), clientData.getAddress(),
+                clientData.getCity(), clientData.getCountry(), clientData.getPostCode(),
+                clientData.getPhoneNumber(), clientData.getEmailAddress(),
+                clientData.getConfirmEmailAddress());
+    }
 
+    public void acceptConditions() {
+        checkoutPage.buttonNext.click();
+        checkoutPage.checkboxAgreements.click();
+        checkoutPage.buttonNext.click();
+    }
+
+    public ClientData invoiceAddress() {
+        return checkoutPage.invoiceAddress();
+    }
+
+    public ClientData deliveryAddress() {
+        return checkoutPage.deliveryAddress();
+    }
+
+    public void clientConfirmOrder() {
+        checkoutPage.buttonConfirmOrder.click();
+    }
+
+    public boolean isOnTheSagePayPage() {
+        return sagePayPage.getCurrentUrl().contains("https://checkout.sagepay.com/");
+    }
 
 }
 

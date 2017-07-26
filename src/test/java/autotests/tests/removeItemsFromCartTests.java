@@ -13,9 +13,7 @@ public class removeItemsFromCartTests extends TestBase {
 
     @BeforeMethod
     public void itemIsAddedToCart() {
-        ItemData item = new ItemData(
-                "Cat Gifts", "Santa's Trouser Tunnel", "1", null, null
-        );
+        ItemData item = new ItemData().inCategory("Cat Gifts").withName("Santa's Trouser Tunnel").withQuantity("1");
         app.chooseItem(item);
         app.addToCart();
     }
@@ -23,7 +21,7 @@ public class removeItemsFromCartTests extends TestBase {
     @Test
     public void removeItemFromCartTests() {
         List<ItemData> itemsFromCartPageBefore = new ArrayList<>(app.getItemsFromCartPage());
-        ItemData item = app.getItemFromCartPageByName("Santa's Trouser Tunnel");
+        ItemData item = app.itemFromCartPageWithName("Santa's Trouser Tunnel");
         app.removeItem(item);
         List<ItemData> itemsFromCartPageAfter = new ArrayList<>(app.getItemsFromCartPage());
 

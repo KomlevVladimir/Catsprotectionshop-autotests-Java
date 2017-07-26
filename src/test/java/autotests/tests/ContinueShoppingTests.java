@@ -10,9 +10,7 @@ public class ContinueShoppingTests extends TestBase {
 
     @BeforeMethod
     public void itemIsAddedToCart() {
-        ItemData item = new ItemData(
-                "Cat Gifts", "Cracker for Your Cat", "1", null, null
-        );
+        ItemData item = new ItemData().inCategory("Cat Gifts").withName("Cracker for Your Cat").withQuantity("1");
         app.chooseItem(item);
         app.addToCart();
     }

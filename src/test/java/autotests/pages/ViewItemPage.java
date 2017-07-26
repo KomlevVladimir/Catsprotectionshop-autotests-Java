@@ -42,7 +42,7 @@ public class ViewItemPage extends BasePage {
         String quantity = quantityInput.getAttribute("value");
         String price = priceText.getText();
         String ref = refText.getText().substring(5);
-        return new ItemData(null, itemName, quantity, price, ref);
+        return new ItemData().withName(itemName).withQuantity(quantity).withPrice(price).withRef(ref);
     }
 
     public boolean buttonAddToCartIsPresent() {
