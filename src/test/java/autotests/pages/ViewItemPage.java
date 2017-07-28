@@ -28,6 +28,9 @@ public class ViewItemPage extends BasePage {
     @FindBy(xpath = "//form//p[3]")
     public WebElement refText;
 
+    @FindBy(xpath = "//p[@class='product-image set-right']/a")
+    public WebElement imageItem;
+
     public void setQuantity(String quantity) {
         fillForm(By.xpath("//fieldset[@class='quantity-box']/input"), quantity);
         wait.until(ExpectedConditions.visibilityOf(priceText));
@@ -50,7 +53,8 @@ public class ViewItemPage extends BasePage {
         return isElementPresent(By.xpath("//input[@class='button cart-button']"));
     }
 
-
-
-
+    public boolean imageIsZoomed() {
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//img[@id='sb-player']")));
+        return isElementPresent(By.xpath("//img[@id='sb-player']"));
+    }
 }

@@ -1,10 +1,12 @@
-package autotests.tests;
+package autotests.tests.cart;
 
 import autotests.model.ClientData;
 import autotests.model.ItemData;
-import org.testng.Assert;
+import autotests.tests.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 public class CheckoutTests extends TestBase {
 
@@ -27,10 +29,10 @@ public class CheckoutTests extends TestBase {
         app.acceptConditions();
         ClientData invoiceAddress = app.invoiceAddress();
         ClientData deliveryAddress = app.deliveryAddress();
-        Assert.assertEquals(invoiceAddress, clientInvoiceAddress);
-        Assert.assertEquals(invoiceAddress, deliveryAddress);
+        assertEquals(invoiceAddress, clientInvoiceAddress);
+        assertEquals(invoiceAddress, deliveryAddress);
         app.clientConfirmOrder();
-        Assert.assertTrue(app.isOnTheSagePayPage());
+        assertTrue(app.isOnTheSagePayPage());
     }
 
     @Test
@@ -38,13 +40,11 @@ public class CheckoutTests extends TestBase {
         ClientData clientInvoiceAddress = new ClientData().withSalutation("Mrs").withFirstName("Catherine")
                 .withLastName("Johnson").withAddress("109 5th avenue").withCity("London")
                 .withCountry("United Kingdom").withPostCode("10002").withPhoneNumber("904569382")
-                .withEmailAddress("Cathy@mailinator.com")
-                .withConfirmEmailAddress("Cathy@mailinator.com");
+                .withEmailAddress("Cathy@mailinator.com").withConfirmEmailAddress("Cathy@mailinator.com");
         ClientData clientDeliveryAddress = new ClientData().withFirstName("Ivan")
                 .withLastName("Petrov").withAddress("Shaftesbury Avenue").withCity("London")
                 .withCountry("United Kingdom").withPostCode("10003").withPhoneNumber("5559422")
-                .withEmailAddress("Ivan@Petrov.com")
-                .withConfirmEmailAddress("Ivan@Petrov.com");
+                .withEmailAddress("Ivan@Petrov.com").withConfirmEmailAddress("Ivan@Petrov.com");
 
         app.enterInvoiceAddress(clientInvoiceAddress);
         app.enterDeliveryAddress(clientDeliveryAddress);
@@ -52,10 +52,22 @@ public class CheckoutTests extends TestBase {
         ClientData invoiceAddress = app.invoiceAddress();
         ClientData deliveryAddress = app.deliveryAddress();
 
-        Assert.assertEquals(invoiceAddress, clientInvoiceAddress);
-        Assert.assertEquals(deliveryAddress, clientDeliveryAddress);
+        assertEquals(invoiceAddress, clientInvoiceAddress);
+        assertEquals(deliveryAddress, clientDeliveryAddress);
         app.clientConfirmOrder();
-        Assert.assertTrue(app.isOnTheSagePayPage());
+        assertTrue(app.isOnTheSagePayPage());
+    }
+
+    @Test
+    public void checkoutWithInvalidDataTests() {
+        ClientData clientData = new ClientData().withSalutation("Mrs").withFirstName(" ")
+                .withLastName(" ").withAddress("109 5th avenue").withCity("London")
+                .withCountry("United Kingdom").withPostCode("10002").withPhoneNumber("904569382")
+                .withEmailAddress("Cathy@mailinator.com").withConfirmEmailAddress("Cathy@mailinator.com");
+        app.enterInvoiceAddress(clientData);
+        app.goToCheckoutSecondStep();
+
+        assertTrue(app.isInvalidAddress());
 
     }
 }

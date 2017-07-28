@@ -1,11 +1,13 @@
-package autotests.tests;
+package autotests.tests.cart;
 
 import autotests.model.ItemData;
-import org.testng.Assert;
+import autotests.tests.TestBase;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.testng.Assert.*;
 
 public class AddItemsToCartTests extends TestBase {
 
@@ -19,15 +21,15 @@ public class AddItemsToCartTests extends TestBase {
         app.addToCart();
         List<ItemData> itemsFromCartPage = new ArrayList<>(app.getItemsFromCartPage());
 
-        Assert.assertTrue(app.isOnTheCartPage());
-        Assert.assertEquals(itemsFromViewPage, itemsFromCartPage);
+        assertTrue(app.isOnTheCartPage());
+        assertEquals(itemsFromViewPage, itemsFromCartPage);
     }
 
     @Test
     public void addFewItemsToCartTests() {
         ItemData firstItem = new ItemData().inCategory("Christmas").withName("Ginger Cat Bauble").withQuantity("1");
         ItemData secondItem = new ItemData().inCategory("Exclusives")
-                .withName("Cats Protection Sticky Notes Set").withQuantity("3");
+                .withName("Cats Protection A5 Notebook").withQuantity("3");
         List<ItemData> itemsFromViewPage = new ArrayList<ItemData>();
         app.chooseItem(firstItem);
         ItemData firstItemFromViewPage = app.getItemFromViewPage();
@@ -39,8 +41,8 @@ public class AddItemsToCartTests extends TestBase {
         app.addToCart();
         List<ItemData>itemsFromCartPage = app.getItemsFromCartPage();
 
-        Assert.assertTrue(app.isOnTheCartPage());
-        Assert.assertEquals(itemsFromViewPage, itemsFromCartPage);
+        assertTrue(app.isOnTheCartPage());
+        assertEquals(itemsFromViewPage, itemsFromCartPage);
     }
 
 }

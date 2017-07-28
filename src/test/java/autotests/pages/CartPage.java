@@ -80,5 +80,25 @@ public class CartPage extends BasePage {
         fillForm(By.xpath("//tbody/tr[2]/td/span/input"), quantity);
     }
 
+    public float getCostSum() {
+        int rows = wd.findElements(By.xpath("//tbody/tr")).size();
+        List<String> costs = new ArrayList<>();
+        for (int i = 2; i < rows - 2; i++) {
+            String cost = substring(wd.findElement(By.xpath("//tbody/tr[" + i + "]/td[@class='cart'][3]"))
+                    .getText(), 1);
+            costs.add(cost);
+            }
+        float result = 0.00f;
+        for (String cost : costs) {
+            result = result + Float.parseFloat(cost);
+        }
+        return result;
+    }
+
+    public float getTotal() {
+        String total = substring(wd.findElement(By.xpath("//td[@class='cartheading']")).getText(), 1);
+        return Float.parseFloat(total);
+    }
+
 
 }

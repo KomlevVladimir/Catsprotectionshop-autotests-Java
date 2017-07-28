@@ -1,13 +1,15 @@
-package autotests.tests;
+package autotests.tests.cart;
 
 
 import autotests.model.ItemData;
-import org.testng.Assert;
+import autotests.tests.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.testng.Assert.*;
 
 public class removeItemsFromCartTests extends TestBase {
 
@@ -25,9 +27,9 @@ public class removeItemsFromCartTests extends TestBase {
         app.removeItem(item);
         List<ItemData> itemsFromCartPageAfter = new ArrayList<>(app.getItemsFromCartPage());
 
-        Assert.assertEquals(itemsFromCartPageAfter.size(), itemsFromCartPageBefore.size() - 1);
+        assertEquals(itemsFromCartPageAfter.size(), itemsFromCartPageBefore.size() - 1);
         itemsFromCartPageBefore.remove(item);
-        Assert.assertEquals(itemsFromCartPageAfter, itemsFromCartPageBefore);
+        assertEquals(itemsFromCartPageAfter, itemsFromCartPageBefore);
     }
 }
 

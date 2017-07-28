@@ -105,7 +105,6 @@ public class ClientData {
     }
 
 
-
     public ClientData withSalutation(String salutation) {
         this.salutation = salutation;
         return this;
@@ -155,7 +154,5 @@ public class ClientData {
         this.confirmEmailAddress = confirmEmailAddress;
         return this;
     }
-
-
 
 }

@@ -2,6 +2,7 @@ package autotests.pages;
 
 
 import autotests.model.ClientData;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -63,8 +64,6 @@ public class CheckoutPage extends BasePage {
     @FindBy(xpath = "//input[@id='idSEPARATESHIP']")
     public WebElement checkboxDeliveryAddress;
 
-
-
     @FindBy(name = "DELIVERFIRSTNAME")
     public WebElement inputDeliveryFirstName;
 
@@ -91,8 +90,6 @@ public class CheckoutPage extends BasePage {
 
     @FindBy(name = "DELIVEREMAIL_CONFIRM")
     public WebElement inputDeliveryConfirmEmailAddress;
-
-
 
     public void enterInvoiceAddress(
             String salutation, String firstName, String lastName, String address, String city,
@@ -137,6 +134,10 @@ public class CheckoutPage extends BasePage {
         return new ClientData().withFirstName(names[0]).withLastName(names[1])
                 .withAddress(data[1]).withCity(data[2]).withPostCode(data[3])
                 .withCountry(data[4]).withPhoneNumber(data[5]).withEmailAddress(data[6]);
+    }
+
+    public boolean textErrorMessageIsPresent() {
+        return isElementPresent(By.xpath("//span[@class='actrequiredcolor']/blockquote"));
     }
 
 

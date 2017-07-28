@@ -1,12 +1,13 @@
-package autotests.tests;
+package autotests.tests.cart;
 
 
 import autotests.model.ItemData;
-import org.testng.Assert;
+import autotests.tests.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static java.lang.Float.parseFloat;
+import static org.testng.Assert.*;
 
 
 public class UpdateCartTests extends TestBase {
@@ -29,9 +30,9 @@ public class UpdateCartTests extends TestBase {
         String quantityAfter = app.itemFromCartPageWithName("Cosy Cats Tea Cosy").getQuantity();
         float actualCost = app.getCost(app.itemFromCartPageWithName("Cosy Cats Tea Cosy"));
 
-        Assert.assertEquals(quantityAfter, "3");
-        Assert.assertTrue(!quantityAfter.equals(quantityBefore));
-        Assert.assertEquals(actualCost, expectedCost);
+        assertEquals(quantityAfter, "3");
+        assertTrue(!quantityAfter.equals(quantityBefore));
+        assertEquals(actualCost, expectedCost);
     }
 
 

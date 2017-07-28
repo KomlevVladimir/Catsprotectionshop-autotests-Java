@@ -4,7 +4,7 @@ package autotests.appmanager;
 import autotests.model.ClientData;
 import autotests.model.ItemData;
 import autotests.pages.*;
-import autotests.tests.SagePayPage;
+import autotests.pages.SagePayPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -45,7 +45,6 @@ public class ApplicationManager {
                 wd = new InternetExplorerDriver();
                 break;
         }
-
 
         mainPage = new MainPage(wd);
         categoryPage = new CategoryPage(wd);
@@ -153,6 +152,55 @@ public class ApplicationManager {
     public boolean isOnTheSagePayPage() {
         return sagePayPage.getCurrentUrl().contains("https://checkout.sagepay.com/");
     }
+
+    public void goToCheckoutSecondStep() {
+        checkoutPage.buttonNext.click();
+    }
+
+    public boolean isInvalidAddress() {
+        return  checkoutPage.textErrorMessageIsPresent();
+    }
+
+    public float costSumOfItems() {
+        return cartPage.getCostSum();
+    }
+
+    public float totalOnTheCartPage() {
+         return cartPage.getTotal();
+    }
+
+    public void chooseCategoryByName(String name) {
+        mainPage.open().chooseCategory(name);
+    }
+
+    public int allItemsInCategory() {
+        String textViewAll = categoryPage.linkViewAll.getText();
+        return Integer.parseInt(textViewAll.substring(textViewAll.indexOf('(') + 1, textViewAll.indexOf(')')));
+    }
+
+    public void clickViewAll() {
+        categoryPage.waitUntilItemListPageIsLoaded();
+        categoryPage.linkViewAll.click();
+    }
+
+   public int itemsCountOnCategoryPage() {
+        return categoryPage.allItemsCount();
+   }
+
+    public void goToViewPage(ItemData itemData)
+    {
+        mainPage.open().chooseCategory(itemData.getItemCategory());
+        categoryPage.gotToViewItemPage(itemData.getItemName());
+    }
+
+    public void previewItem() {
+        viewItemPage.imageItem.click();
+    }
+
+    public boolean zoomedImageIsDisplayed() {
+        return viewItemPage.imageIsZoomed();
+    }
+
 
 }
 

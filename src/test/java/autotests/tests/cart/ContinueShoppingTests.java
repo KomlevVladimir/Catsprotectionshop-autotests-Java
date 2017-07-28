@@ -1,16 +1,18 @@
-package autotests.tests;
+package autotests.tests.cart;
 
 
 import autotests.model.ItemData;
-import org.testng.Assert;
+import autotests.tests.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
 
 public class ContinueShoppingTests extends TestBase {
 
     @BeforeMethod
     public void itemIsAddedToCart() {
-        ItemData item = new ItemData().inCategory("Cat Gifts").withName("Cracker for Your Cat").withQuantity("1");
+        ItemData item = new ItemData().inCategory("Cat Gifts").withName("Morocco Cat Bed").withQuantity("1");
         app.chooseItem(item);
         app.addToCart();
     }
@@ -19,7 +21,7 @@ public class ContinueShoppingTests extends TestBase {
     public void continueShoppingTests() {
         app.continueShopping();
 
-        Assert.assertTrue(app.isOnTheViewItemPage());
+        assertTrue(app.isOnTheViewItemPage());
     }
 
 }
