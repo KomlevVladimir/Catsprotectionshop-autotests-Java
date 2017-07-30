@@ -1,6 +1,7 @@
 package autotests.tests.cart;
 
 import autotests.model.ItemData;
+import autotests.tests.DataProviders;
 import autotests.tests.TestBase;
 import org.testng.annotations.Test;
 
@@ -11,9 +12,9 @@ import static org.testng.Assert.*;
 
 public class AddItemsToCartTests extends TestBase {
 
-    @Test
-    public void addItemToCartTests() {
-        ItemData item = new ItemData().inCategory("Gifts").withName("Kitten Mini Umbrella").withQuantity("2");
+
+    @Test(dataProvider = "item", dataProviderClass = DataProviders.class)
+    public void addItemToCartTests(ItemData item) {
         List<ItemData> itemsFromViewPage = new ArrayList<>();
         app.chooseItem(item);
         ItemData itemOnViewPage = app.getItemFromViewPage();
@@ -25,20 +26,26 @@ public class AddItemsToCartTests extends TestBase {
         assertEquals(itemsFromViewPage, itemsFromCartPage);
     }
 
-    @Test
-    public void addFewItemsToCartTests() {
-        ItemData firstItem = new ItemData().inCategory("Christmas").withName("Ginger Cat Bauble").withQuantity("1");
-        ItemData secondItem = new ItemData().inCategory("Exclusives")
-                .withName("Cats Protection A5 Notebook").withQuantity("3");
+    @Test(dataProvider = "items", dataProviderClass = DataProviders.class)
+    public void addFewItemsToCartTests(ItemData firstItem, ItemData secondItem, ItemData thirdItem) {
+
         List<ItemData> itemsFromViewPage = new ArrayList<ItemData>();
+
         app.chooseItem(firstItem);
         ItemData firstItemFromViewPage = app.getItemFromViewPage();
         itemsFromViewPage.add(firstItemFromViewPage);
         app.addToCart();
+
         app.chooseItem(secondItem);
         ItemData secondItemFromViewPage = app.getItemFromViewPage();
         itemsFromViewPage.add(secondItemFromViewPage);
         app.addToCart();
+
+        app.chooseItem(thirdItem);
+        ItemData thirdItemFromViewPage = app.getItemFromViewPage();
+        itemsFromViewPage.add(thirdItemFromViewPage);
+        app.addToCart();
+
         List<ItemData>itemsFromCartPage = app.getItemsFromCartPage();
 
         assertTrue(app.isOnTheCartPage());

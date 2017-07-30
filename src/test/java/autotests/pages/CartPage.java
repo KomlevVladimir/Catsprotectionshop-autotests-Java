@@ -63,11 +63,10 @@ public class CartPage extends BasePage {
         return null;
     }
 
-    public String getCostByName(ItemData item) {
+    public String getCostByItem(ItemData item) {
         List<ItemData>itemsOnCartPage = getItems();
         int index = itemsOnCartPage.indexOf(item) + 2;
         return substring(wd.findElement(By.xpath("//tbody/tr[" + index + "]/td[3]")).getText(), 1);
-
     }
 
     public void activateCheckboxToRemoveItem(ItemData item) {

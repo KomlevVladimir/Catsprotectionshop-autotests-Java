@@ -92,8 +92,8 @@ public class ApplicationManager {
         cartPage.buttonUpdate.click();
     }
 
-    public float getCost(ItemData item) {
-        return parseFloat(cartPage.getCostByName(item));
+    public float costOfItemOnTheCartPage(ItemData item) {
+        return parseFloat(cartPage.getCostByItem(item));
     }
 
     public void removeItem(ItemData item) {
@@ -199,6 +199,14 @@ public class ApplicationManager {
 
     public boolean zoomedImageIsDisplayed() {
         return viewItemPage.imageIsZoomed();
+    }
+
+    public void addItemToCart(ItemData itemData)
+    {
+        mainPage.open().chooseCategory(itemData.getItemCategory());
+        categoryPage.gotToViewItemPage(itemData.getItemName());
+        viewItemPage.setQuantity(itemData.getQuantity());
+        viewItemPage.addToCart();
     }
 
 
