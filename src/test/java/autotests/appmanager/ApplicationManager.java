@@ -3,8 +3,10 @@ package autotests.appmanager;
 
 import autotests.model.ClientData;
 import autotests.model.ItemData;
-import autotests.pages.*;
-import autotests.pages.SagePayPage;
+import autotests.pages.otherpages.SagePayPage;
+import autotests.pages.frontpages.*;
+import autotests.pages.frontpages.pageelements.FooterBlockElements;
+import autotests.pages.frontpages.pageelements.LeftSideBlockElements;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -26,6 +28,8 @@ public class ApplicationManager {
     private CartPage cartPage;
     private CheckoutPage checkoutPage;
     private SagePayPage sagePayPage;
+    private LeftSideBlockElements leftSideBlockElements;
+    private FooterBlockElements footerBlockElements;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -52,6 +56,8 @@ public class ApplicationManager {
         cartPage = new CartPage(wd);
         checkoutPage = new CheckoutPage(wd);
         sagePayPage = new SagePayPage(wd);
+        leftSideBlockElements = new LeftSideBlockElements(wd);
+        footerBlockElements = new FooterBlockElements(wd);
     }
 
     public void stop() {
@@ -63,6 +69,10 @@ public class ApplicationManager {
         mainPage.open().chooseCategory(itemData.getItemCategory());
         categoryPage.gotToViewItemPage(itemData.getItemName());
         viewItemPage.setQuantity(itemData.getQuantity());
+    }
+
+    public void goToMainPage() {
+        mainPage.open();
     }
 
     public void addToCart()
@@ -207,6 +217,18 @@ public class ApplicationManager {
         categoryPage.gotToViewItemPage(itemData.getItemName());
         viewItemPage.setQuantity(itemData.getQuantity());
         viewItemPage.addToCart();
+    }
+
+    public void goToLeftSideLink(String linkName) {
+        leftSideBlockElements.goToLinkByName(linkName);
+    }
+
+    public boolean isOnThePage(String url) {
+        return wd.getCurrentUrl().contains(url);
+    }
+
+    public void goToFooterLink(String linkName) {
+        footerBlockElements.goToLinkByName(linkName);
     }
 
 

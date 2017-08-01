@@ -1,4 +1,4 @@
-package autotests.pages;
+package autotests.pages.otherpages;
 
 
 import autotests.pages.BasePage;

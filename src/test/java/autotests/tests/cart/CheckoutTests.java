@@ -47,7 +47,6 @@ public class CheckoutTests extends TestBase {
     public void checkoutWithInvalidDataTests(ItemData item, ClientData clientInvoiceAddress) {
         app.enterInvoiceAddress(clientInvoiceAddress);
         app.goToCheckoutSecondStep();
-
         assertTrue(app.isInvalidAddress());
 
     }

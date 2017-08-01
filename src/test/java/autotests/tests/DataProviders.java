@@ -7,6 +7,10 @@ import autotests.model.ClientData;
 import autotests.model.ItemData;
 import org.testng.annotations.DataProvider;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class DataProviders {
 
     @DataProvider(name = "item")
@@ -26,7 +30,6 @@ public class DataProviders {
         String categoryForFirstItem = itemGenerator.generateCategory();
         String firstItem = itemGenerator.generateItem(categoryForFirstItem);
         String firstQuantity = itemGenerator.generateQuantity();
-
         String categoryForSecondItem = itemGenerator.generateCategory();
         String secondItem = itemGenerator.generateItem(categoryForSecondItem);
         String secondQuantity = itemGenerator.generateQuantity();
@@ -61,7 +64,6 @@ public class DataProviders {
         }
         return new Object[][]{
                 new Object[]{new ItemData().inCategory(category).withName(item).withQuantity(quantity), newQuantity},
-
         };
     }
 
@@ -157,7 +159,54 @@ public class DataProviders {
         };
     }
 
+    @DataProvider(name = "category")
+    public static Object[][] category() {
+        ItemDataGenerator itemGenerator = new ItemDataGenerator();
+        String category = itemGenerator.generateCategory();
+        return new Object[][]{
+                new Object[]{category}
+        };
+    }
 
+    @DataProvider(name = "leftSideLinks")
+    public static Iterator<Object[]> leftSideLinks() {
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"Home", "https://www.catsprotectionshop.co.uk/index.html"});
+        list.add(new Object[] {"About Cats Protection",
+                "https://www.catsprotectionshop.co.uk/acatalog/About-Cats-Protection.html"});
+        list.add(new Object[] {"Cookie Policy", "https://www.catsprotectionshop.co.uk/acatalog/Cookie-Policy.html"});
+        list.add(new Object[] {"Delivery", "https://www.catsprotectionshop.co.uk/acatalog/Delivery.html"});
+        list.add(new Object[] {"Contact Us", "https://www.catsprotectionshop.co.uk/acatalog/Contact-Us.html"});
+        return  list.iterator();
+
+    }
+
+    @DataProvider(name = "footerLinks")
+    public static Iterator<Object[]> footerLinks() {
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"Contact Us", "https://www.catsprotectionshop.co.uk/acatalog/Contact-Us.html"});
+        list.add(new Object[] {"Terms & Conditions", "https://www.catsprotectionshop.co.uk/acatalog/info.html"});
+        list.add(new Object[] {"Site Map", "https://www.catsprotectionshop.co.uk/acatalog/sitemap.html"});
+        list.add(new Object[] {"Privacy & Security Information",
+                "https://www.catsprotectionshop.co.uk/acatalog/info.html"});
+        return  list.iterator();
+
+    }
+
+    @DataProvider(name = "categoryLinks")
+    public static Iterator<Object[]> categoryLinks() {
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"Sale", "https://www.catsprotectionshop.co.uk/acatalog/Sale.html"});
+        list.add(new Object[] {"Donate", "https://www.catsprotectionshop.co.uk/acatalog/Donate-1.html"});
+        list.add(new Object[] {"Exclusives", "https://www.catsprotectionshop.co.uk/acatalog/Offers-p1.html"});
+        list.add(new Object[] {"Black Cat Day", "https://www.catsprotectionshop.co.uk/acatalog/Black-Cat-Day-p1.html"});
+        list.add(new Object[] {"Christmas", "https://www.catsprotectionshop.co.uk/acatalog/Gift-Wrap-Collection-p1.html"});
+        list.add(new Object[] {"Gifts", "https://www.catsprotectionshop.co.uk/acatalog/Gifts-p1.html"});
+        list.add(new Object[] {"Home & Kitchen", "https://www.catsprotectionshop.co.uk/acatalog/Home-p1.html"});
+        list.add(new Object[] {"Cat Gifts", "https://www.catsprotectionshop.co.uk/acatalog/Pet-Gifts-p1.html"});
+        return  list.iterator();
+
+    }
 
 }
 
