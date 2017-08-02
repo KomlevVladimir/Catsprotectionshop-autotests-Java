@@ -28,24 +28,19 @@ public class AddItemsToCartTests extends TestBase {
 
     @Test(dataProvider = "items", dataProviderClass = DataProviders.class)
     public void addFewItemsToCartTests(ItemData firstItem, ItemData secondItem, ItemData thirdItem) {
-
         List<ItemData> itemsFromViewPage = new ArrayList<ItemData>();
-
         app.chooseItem(firstItem);
         ItemData firstItemFromViewPage = app.getItemFromViewPage();
         itemsFromViewPage.add(firstItemFromViewPage);
         app.addToCart();
-
         app.chooseItem(secondItem);
         ItemData secondItemFromViewPage = app.getItemFromViewPage();
         itemsFromViewPage.add(secondItemFromViewPage);
         app.addToCart();
-
         app.chooseItem(thirdItem);
         ItemData thirdItemFromViewPage = app.getItemFromViewPage();
         itemsFromViewPage.add(thirdItemFromViewPage);
         app.addToCart();
-
         List<ItemData>itemsFromCartPage = app.getItemsFromCartPage();
 
         assertTrue(app.isOnTheCartPage());

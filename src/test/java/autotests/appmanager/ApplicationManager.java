@@ -13,7 +13,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import static java.lang.Float.parseFloat;
 
@@ -21,6 +26,7 @@ public class ApplicationManager {
     private WebDriver wd;
 
     private String browser;
+    private final Properties properties;
 
     private MainPage mainPage;
     private CategoryPage categoryPage;
@@ -33,9 +39,10 @@ public class ApplicationManager {
 
     public ApplicationManager(String browser) {
         this.browser = browser;
+        properties = new Properties();
     }
 
-    public void init() {
+    public void init() throws IOException {
         switch (browser) {
             case BrowserType.FIREFOX:
                 wd = new FirefoxDriver();
@@ -49,6 +56,11 @@ public class ApplicationManager {
                 wd = new InternetExplorerDriver();
                 break;
         }
+
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+        wd.get(properties.getProperty("web.baseUrl"));
 
         mainPage = new MainPage(wd);
         categoryPage = new CategoryPage(wd);
@@ -66,13 +78,9 @@ public class ApplicationManager {
 
     public void chooseItem(ItemData itemData)
     {
-        mainPage.open().chooseCategory(itemData.getItemCategory());
+        mainPage.chooseCategory(itemData.getItemCategory());
         categoryPage.gotToViewItemPage(itemData.getItemName());
         viewItemPage.setQuantity(itemData.getQuantity());
-    }
-
-    public void goToMainPage() {
-        mainPage.open();
     }
 
     public void addToCart()
@@ -180,7 +188,7 @@ public class ApplicationManager {
     }
 
     public void chooseCategoryByName(String name) {
-        mainPage.open().chooseCategory(name);
+        mainPage.chooseCategory(name);
     }
 
     public int allItemsInCategory() {
@@ -199,7 +207,7 @@ public class ApplicationManager {
 
     public void goToViewPage(ItemData itemData)
     {
-        mainPage.open().chooseCategory(itemData.getItemCategory());
+        mainPage.chooseCategory(itemData.getItemCategory());
         categoryPage.gotToViewItemPage(itemData.getItemName());
     }
 
@@ -213,7 +221,7 @@ public class ApplicationManager {
 
     public void addItemToCart(ItemData itemData)
     {
-        mainPage.open().chooseCategory(itemData.getItemCategory());
+        mainPage.chooseCategory(itemData.getItemCategory());
         categoryPage.gotToViewItemPage(itemData.getItemName());
         viewItemPage.setQuantity(itemData.getQuantity());
         viewItemPage.addToCart();

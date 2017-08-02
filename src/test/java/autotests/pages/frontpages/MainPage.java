@@ -23,5 +23,4 @@ public class MainPage extends BasePage {
     }
 
 
-
 }

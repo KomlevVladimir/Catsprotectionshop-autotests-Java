@@ -9,3 +9,17 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
     testCompile group: 'com.github.javafaker', name: 'javafaker', version: '0.13'
 }
+
+test {
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
+
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+}

@@ -163,6 +163,9 @@ public class DataProviders {
     public static Object[][] category() {
         ItemDataGenerator itemGenerator = new ItemDataGenerator();
         String category = itemGenerator.generateCategory();
+        while (category.equals("Sale")) {
+            category = itemGenerator.generateCategory();
+        }
         return new Object[][]{
                 new Object[]{category}
         };

@@ -11,7 +11,6 @@ public class CategoryNavigationTests extends TestBase {
 
     @Test(dataProvider = "categoryLinks", dataProviderClass = DataProviders.class)
     public void categoryNavigationTests(String category, String url) {
-        app.goToMainPage();
         app.chooseCategoryByName(category);
 
         assertTrue(app.isOnThePage(url));

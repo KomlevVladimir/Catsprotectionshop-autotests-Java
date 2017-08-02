@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Cart" >
+        <classes>
+            <class name="autotests.tests.cart.AddItemsToCartTests" />
+            <class name="autotests.tests.cart.removeItemsFromCartTests" />
+            <class name="autotests.tests.cart.UpdateCartTests" />
+            <class name="autotests.tests.cart.ContinueShoppingTests" />
+            <class name="autotests.tests.cart.CalculateTotalTests" />
+            <class name="autotests.tests.cart.CheckoutTests"/>
+        </classes>
+    </test>
+
+    <test name="View">
+        <classes>
+            <class name="autotests.tests.view.ViewAllItemsInCategoryTests"/>
+            <class name="autotests.tests.view.PreviewItemTests"/>
+        </classes>
+    </test>
+
+    <test name="Navigation">
+        <classes>
+            <class name="autotests.tests.navigation.CategoryNavigationTests"/>
+            <class name="autotests.tests.navigation.LeftSideBarNavigationTests"/>
+            <class name="autotests.tests.navigation.FooterNavigationTests"/>
+        </classes>
+    </test>
+</suite>

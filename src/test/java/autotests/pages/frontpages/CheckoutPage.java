@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class CheckoutPage extends BasePage {
@@ -95,6 +96,7 @@ public class CheckoutPage extends BasePage {
     public void enterInvoiceAddress(
             String salutation, String firstName, String lastName, String address, String city,
             String country, String postCode, String phoneNumber, String emailAddress, String confirmEmailAddress) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.name("INVOICESALUTATION")));
         inputSalutation.sendKeys(salutation);
         inputInvoiceFirstName.sendKeys(firstName);
         inputInvoiceLastName.sendKeys(lastName);

@@ -23,7 +23,6 @@ public class removeItemsFromCartTests extends TestBase {
     @Test(dataProvider = "item", dataProviderClass = DataProviders.class)
     public void removeItemFromCartTests(ItemData itemToRemove) {
         app.addItemToCart(itemToRemove);
-
         List<ItemData> itemsFromCartPageBefore = new ArrayList<>(app.getItemsFromCartPage());
         ItemData item = app.itemFromCartPageWithName(itemToRemove.getItemName());
         app.removeItem(item);

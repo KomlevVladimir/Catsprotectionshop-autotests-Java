@@ -3,19 +3,16 @@ package autotests.generators;
 
 import com.github.javafaker.Faker;
 
-import java.util.Random;
-
 public class ClientDataGenerator {
 
     public String  generateSalutation() {
-        Random rnd = new Random();
-        int number = rnd.nextInt(1);
+        int number = 1 + (int) (Math.random() * ((2 - 1) + 1));
         String salutation = "";
         switch (number) {
-            case 0:
+            case 1:
                 salutation = "Mr";
                 break;
-            case 1:
+            case 2:
                 salutation = "Mrs";
                 break;
         }
@@ -61,7 +58,5 @@ public class ClientDataGenerator {
         Faker faker = new Faker();
         return faker.internet().emailAddress();
     }
-
-
 
 }

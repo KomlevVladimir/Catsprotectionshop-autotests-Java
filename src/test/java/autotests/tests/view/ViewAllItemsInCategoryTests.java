@@ -1,4 +1,4 @@
-package autotests.tests.View;
+package autotests.tests.view;
 
 
 import autotests.tests.DataProviders;
