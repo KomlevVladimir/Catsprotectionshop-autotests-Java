@@ -18,7 +18,7 @@ public class CheckoutTests extends TestBase {
     }
 
     @Test(dataProvider = "checkoutInvoiceAddress", dataProviderClass = DataProviders.class)
-    public void checkoutWithOnlyInvoiceAddressTests(ItemData item, ClientData clientInvoiceAddress) {
+    public void testCheckoutWithOnlyInvoiceAddress(ItemData item, ClientData clientInvoiceAddress) {
         app.enterInvoiceAddress(clientInvoiceAddress);
         app.acceptConditions();
         ClientData invoiceAddress = app.invoiceAddress();
@@ -30,7 +30,7 @@ public class CheckoutTests extends TestBase {
     }
 
     @Test(dataProvider = "checkoutDeliveryAddress", dataProviderClass = DataProviders.class)
-    public void checkoutWithDeliveryAddressTests(
+    public void testCheckoutWithDeliveryAddress(
             ItemData item, ClientData clientInvoiceAddress, ClientData clientDeliveryAddress) {
         app.enterInvoiceAddress(clientInvoiceAddress);
         app.enterDeliveryAddress(clientDeliveryAddress);
@@ -44,7 +44,7 @@ public class CheckoutTests extends TestBase {
     }
 
     @Test(dataProvider = "invalidInvoiceAddress", dataProviderClass = DataProviders.class)
-    public void checkoutWithInvalidDataTests(ItemData item, ClientData clientInvoiceAddress) {
+    public void testCheckoutWithInvalidData(ItemData item, ClientData clientInvoiceAddress) {
         app.enterInvoiceAddress(clientInvoiceAddress);
         app.goToCheckoutSecondStep();
         assertTrue(app.isInvalidAddress());

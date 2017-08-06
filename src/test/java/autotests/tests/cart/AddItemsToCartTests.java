@@ -14,7 +14,7 @@ public class AddItemsToCartTests extends TestBase {
 
 
     @Test(dataProvider = "item", dataProviderClass = DataProviders.class)
-    public void addItemToCartTests(ItemData item) {
+    public void testAddItemToCart(ItemData item) {
         List<ItemData> itemsFromViewPage = new ArrayList<>();
         app.chooseItem(item);
         ItemData itemOnViewPage = app.getItemFromViewPage();
@@ -27,7 +27,7 @@ public class AddItemsToCartTests extends TestBase {
     }
 
     @Test(dataProvider = "items", dataProviderClass = DataProviders.class)
-    public void addFewItemsToCartTests(ItemData firstItem, ItemData secondItem, ItemData thirdItem) {
+    public void testAddFewItemsToCart(ItemData firstItem, ItemData secondItem, ItemData thirdItem) {
         List<ItemData> itemsFromViewPage = new ArrayList<ItemData>();
         app.chooseItem(firstItem);
         ItemData firstItemFromViewPage = app.getItemFromViewPage();

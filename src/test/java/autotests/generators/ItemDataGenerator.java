@@ -199,5 +199,10 @@ public class ItemDataGenerator {
         return String.valueOf(quantity);
     }
 
+    public String generatePrice() {
+        int priceValue =  1 + (int) (Math.random() * ((5 - 1) + 1));
+        return Integer.toString(priceValue);
+    }
+
 
 }

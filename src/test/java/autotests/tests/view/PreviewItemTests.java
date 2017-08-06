@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class PreviewItemTests extends TestBase {
 
     @Test(dataProvider = "item", dataProviderClass = DataProviders.class)
-    public void viewItemTests(ItemData item) {
+    public void testViewItem(ItemData item) {
         app.goToViewPage(item);
         app.previewItem();
 

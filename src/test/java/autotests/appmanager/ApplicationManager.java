@@ -3,6 +3,7 @@ package autotests.appmanager;
 
 import autotests.model.ClientData;
 import autotests.model.ItemData;
+import autotests.pages.frontpages.pageelements.HeaderBlockElements;
 import autotests.pages.otherpages.SagePayPage;
 import autotests.pages.frontpages.*;
 import autotests.pages.frontpages.pageelements.FooterBlockElements;
@@ -12,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,6 +38,8 @@ public class ApplicationManager {
     private SagePayPage sagePayPage;
     private LeftSideBlockElements leftSideBlockElements;
     private FooterBlockElements footerBlockElements;
+    private HeaderBlockElements headerBlockElements;
+    private SearchPage searchPage;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -70,6 +74,8 @@ public class ApplicationManager {
         sagePayPage = new SagePayPage(wd);
         leftSideBlockElements = new LeftSideBlockElements(wd);
         footerBlockElements = new FooterBlockElements(wd);
+        headerBlockElements = new HeaderBlockElements(wd);
+        searchPage = new SearchPage(wd);
     }
 
     public void stop() {
@@ -238,6 +244,38 @@ public class ApplicationManager {
     public void goToFooterLink(String linkName) {
         footerBlockElements.goToLinkByName(linkName);
     }
+
+    public void searchItemByAnyWords(String words) {
+        headerBlockElements.searchByWords(words);
+    }
+
+    public List<ItemData> itemsFromSearchPage() {
+        return searchPage.getItems();
+    }
+
+    public void searchItemByAllWords(String words) {
+        headerBlockElements.buttonSearch.click();
+        searchPage.checkboxAllWords.click();
+        searchPage.search(words);
+    }
+
+    public void searchByPrice(String priceRange, String words) {
+        headerBlockElements.buttonSearch.click();
+        searchPage.searchByPrice(priceRange, words);
+    }
+
+    public float priceFrom(String priceValue) {
+        return searchPage.priceFrom(priceValue);
+    }
+
+    public float priceUntil(String priceValue) {
+        return searchPage.priceUntil(priceValue);
+    }
+
+
+
+
+
 
 
 }

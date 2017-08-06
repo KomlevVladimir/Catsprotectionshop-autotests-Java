@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 public class LeftSideBarNavigationTests  extends TestBase{
 
     @Test(dataProvider = "leftSideLinks", dataProviderClass = DataProviders.class)
-    public void leftSideBarNavigationTests(String link, String url) {
+    public void testLeftSideBarNavigation(String link, String url) {
         app.goToLeftSideLink(link);
 
         assertTrue(app.isOnThePage(url));

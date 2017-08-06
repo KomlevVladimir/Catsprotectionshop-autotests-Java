@@ -10,7 +10,7 @@ import static org.testng.Assert.assertEquals;
 public class ViewAllItemsInCategoryTests extends TestBase {
 
     @Test(dataProvider = "category", dataProviderClass = DataProviders.class)
-    public void viewAllItemsInCategoryTests(String category) {
+    public void testViewAllItemsInCategory(String category) {
         app.chooseCategoryByName(category);
         int itemsCountFromViewAllLinkText = app.allItemsInCategory();
         app.clickViewAll();

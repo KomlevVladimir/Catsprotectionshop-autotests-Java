@@ -22,7 +22,7 @@ public class CalculateTotalTests extends TestBase {
     }
 
     @Test(dataProvider = "items", dataProviderClass = DataProviders.class)
-    public void calculateTotalTests(ItemData firstItem, ItemData secondItem, ItemData thirdItem){
+    public void testCalculateTotal(ItemData firstItem, ItemData secondItem, ItemData thirdItem){
         float costSum = app.costSumOfItems();
         float total = app.totalOnTheCartPage();
 

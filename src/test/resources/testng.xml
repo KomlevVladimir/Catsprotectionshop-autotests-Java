@@ -19,6 +19,12 @@
         </classes>
     </test>
 
+    <test name="Search">
+        <classes>
+            <class name="autotests.tests.search.SearchTests"/>
+        </classes>
+    </test>
+
     <test name="Navigation">
         <classes>
             <class name="autotests.tests.navigation.CategoryNavigationTests"/>

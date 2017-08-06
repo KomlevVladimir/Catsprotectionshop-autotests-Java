@@ -211,6 +211,45 @@ public class DataProviders {
 
     }
 
+    @DataProvider(name = "anyWord")
+    public static Object[][] anySearchWord() {
+        String itemName = "cat";
+
+        return new Object[][]{
+                new Object[]{itemName}
+        };
+    }
+
+    @DataProvider(name = "allWords")
+    public static Object[][] allSearchWord() {
+        String itemName = "Black Cat Shopper";
+
+        return new Object[][]{
+                new Object[]{itemName}
+        };
+    }
+
+
+    @DataProvider(name = "price")
+    public static Object[][] price() {
+        ItemDataGenerator itemGenerator = new ItemDataGenerator();
+        String price = itemGenerator.generatePrice();
+        String words = "";
+
+        return new Object[][]{
+                new Object[]{price, words}
+        };
+    }
+
+    @DataProvider(name = "nonexistenItemName")
+    public static Object[][] seatchNonexistenItem() {
+        String itemName = "dog";
+
+        return new Object[][]{
+                new Object[]{itemName}
+        };
+    }
+
 }
 
 

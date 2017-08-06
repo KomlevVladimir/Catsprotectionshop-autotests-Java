@@ -7,7 +7,6 @@ import autotests.tests.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static java.lang.Float.floatToIntBits;
 import static java.lang.Float.parseFloat;
 import static org.apache.commons.lang3.StringUtils.substring;
 import static org.testng.Assert.*;
@@ -23,7 +22,7 @@ public class UpdateCartTests extends TestBase {
     }
 
     @Test(dataProvider = "update", dataProviderClass = DataProviders.class)
-    public void updateCartTests(ItemData item, String newQuantity) {
+    public void testUpdateCart(ItemData item, String newQuantity) {
         String quantityBefore = app.itemFromCartPageWithName(item.getItemName()).getQuantity();
         app.changeQuantityTo(newQuantity);
         String price = substring(app.itemFromCartPageWithName(item.getItemName()).getPrice(), 1);

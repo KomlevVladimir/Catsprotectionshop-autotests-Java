@@ -19,7 +19,7 @@ public class ContinueShoppingTests extends TestBase {
     }
 
     @Test(dataProvider = "item", dataProviderClass = DataProviders.class)
-    public void continueShoppingTests(ItemData item) {
+    public void testContinueShopping(ItemData item) {
         app.continueShopping();
 
         assertTrue(app.isOnTheViewItemPage());
