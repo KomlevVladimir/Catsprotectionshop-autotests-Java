@@ -174,7 +174,7 @@ public class ApplicationManager {
     }
 
     public boolean isOnTheSagePayPage() {
-        return sagePayPage.getCurrentUrl().contains("https://checkout.sagepay.com/");
+        return sagePayPage.getCurrentUrl().contains("https://live.sagepay.com/");
     }
 
     public void goToCheckoutSecondStep() {
