@@ -201,7 +201,11 @@ public class ItemDataGenerator {
 
     public String generatePrice() {
         int priceValue =  1 + (int) (Math.random() * ((5 - 1) + 1));
+        if (priceValue == 5) {
+            return  "75";
+        } else {
         return Integer.toString(priceValue);
+        }
     }
 
 
