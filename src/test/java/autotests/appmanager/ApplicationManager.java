@@ -278,11 +278,9 @@ public class ApplicationManager {
         return searchPage.priceUntil(priceValue);
     }
 
-
-
-
-
-
+    public byte[] takeScreenshot() {
+        return ((TakesScreenshot)wd).getScreenshotAs(OutputType.BYTES);
+    }
 
 }
 
