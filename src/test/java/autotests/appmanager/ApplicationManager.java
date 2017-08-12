@@ -46,6 +46,9 @@ public class ApplicationManager {
     }
 
     public void init() throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
         if("".equals(properties.getProperty("selenium.server"))) {
             switch (browser) {
                 case BrowserType.FIREFOX:
@@ -66,9 +69,6 @@ public class ApplicationManager {
             capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "linux")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
-
-        String target = System.getProperty("target", "local");
-        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
         wd.get(properties.getProperty("web.baseUrl"));
 
