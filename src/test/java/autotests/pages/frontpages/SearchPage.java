@@ -50,52 +50,52 @@ public class SearchPage extends BasePage {
         click(By.xpath("//fieldset/input[3]"));
     }
 
-    public float priceFrom(String priceValue) {
-        float priceFrom = 0.00f;
+    public double priceFrom(String priceValue) {
+        double priceFrom = 0;
         switch (priceValue) {
             case "1":
-                priceFrom = 0.00f;
+                priceFrom = 0;
                 break;
 
             case "2":
-                priceFrom = 10.00f;
+                priceFrom = 10.00;
                 break;
 
             case "3":
-                priceFrom = 20.00f;
+                priceFrom = 20.00;
                 break;
 
             case "4":
-                priceFrom = 40.00f;
+                priceFrom = 40.00;
                 break;
 
             case "5":
-                priceFrom = 50.00f;
+                priceFrom = 50.00;
         }
         return priceFrom;
     }
 
-    public float priceUntil(String priceValue) {
-        float priceUntil = 0.00f;
+    public double priceUntil(String priceValue) {
+        double priceUntil = 0;
         switch (priceValue) {
             case "1":
-                priceUntil = 9.99f;
+                priceUntil = 9.99;
                 break;
 
             case "2":
-                priceUntil = 19.99f;
+                priceUntil = 19.99;
                 break;
 
             case "3":
-                priceUntil = 39.99f;
+                priceUntil = 39.99;
                 break;
 
             case "4":
-                priceUntil = 49.99f;
+                priceUntil = 49.99;
                 break;
 
             case "5":
-                priceUntil = 10000.00f;
+                priceUntil = 10000.00;
         }
          return priceUntil;
     }

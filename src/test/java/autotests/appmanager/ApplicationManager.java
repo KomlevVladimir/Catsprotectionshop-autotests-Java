@@ -13,16 +13,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.Assert;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-
-import static java.lang.Float.parseFloat;
 
 public class ApplicationManager {
     private WebDriver wd;
@@ -116,8 +112,8 @@ public class ApplicationManager {
         cartPage.buttonUpdate.click();
     }
 
-    public float costOfItemOnTheCartPage(ItemData item) {
-        return parseFloat(cartPage.getCostByItem(item));
+    public double costOfItemOnTheCartPage(ItemData item) {
+        return cartPage.getCostByItem(item);
     }
 
     public void removeItem(ItemData item) {
@@ -185,11 +181,11 @@ public class ApplicationManager {
         return  checkoutPage.textErrorMessageIsPresent();
     }
 
-    public float costSumOfItems() {
+    public double costSumOfItems() {
         return cartPage.getCostSum();
     }
 
-    public float totalOnTheCartPage() {
+    public double totalOnTheCartPage() {
          return cartPage.getTotal();
     }
 
@@ -264,11 +260,11 @@ public class ApplicationManager {
         searchPage.searchByPrice(priceRange, words);
     }
 
-    public float priceFrom(String priceValue) {
+    public double priceFrom(String priceValue) {
         return searchPage.priceFrom(priceValue);
     }
 
-    public float priceUntil(String priceValue) {
+    public double priceUntil(String priceValue) {
         return searchPage.priceUntil(priceValue);
     }
 

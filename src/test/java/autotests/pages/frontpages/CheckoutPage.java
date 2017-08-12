@@ -11,6 +11,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import static org.apache.commons.lang3.StringUtils.replace;
+
 public class CheckoutPage extends BasePage {
 
     public CheckoutPage(WebDriver wd) {
@@ -124,7 +126,8 @@ public class CheckoutPage extends BasePage {
     }
 
     public ClientData invoiceAddress() {
-        String[] data = textInvoiceAddress.getText().split("\n");
+        String text = replace(textInvoiceAddress.getText(), "Invoice Address:\n", "");
+        String[] data = text.split("\n");
         String[] names = data[0].split(" ");
         return new ClientData().withFirstName(names[0]).withLastName(names[1])
                 .withAddress(data[1]).withCity(data[2]).withPostCode(data[3])
@@ -132,7 +135,8 @@ public class CheckoutPage extends BasePage {
     }
 
     public ClientData deliveryAddress() {
-        String[] data = textDeliveryAddress.getText().split("\n");
+        String text = replace(textDeliveryAddress.getText(), "Deliver To:\n", "");
+        String[] data = text.split("\n");
         String[] names = data[0].split(" ");
         return new ClientData().withFirstName(names[0]).withLastName(names[1])
                 .withAddress(data[1]).withCity(data[2]).withPostCode(data[3])

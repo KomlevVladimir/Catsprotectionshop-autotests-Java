@@ -7,7 +7,7 @@ import autotests.tests.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static java.lang.Float.parseFloat;
+import static java.lang.Double.parseDouble;
 import static org.apache.commons.lang3.StringUtils.substring;
 import static org.testng.Assert.*;
 
@@ -26,10 +26,10 @@ public class UpdateCartTests extends TestBase {
         String quantityBefore = app.itemFromCartPageWithName(item.getItemName()).getQuantity();
         app.changeQuantityTo(newQuantity);
         String price = substring(app.itemFromCartPageWithName(item.getItemName()).getPrice(), 1);
-        float expectedCost = parseFloat(price) * parseFloat(newQuantity);
+        double expectedCost = Math.ceil(parseDouble(price) * parseDouble(newQuantity) * 100) / 100;
         app.updateCart();
         String quantityAfter = app.itemFromCartPageWithName(item.getItemName()).getQuantity();
-        float costOnTheCartPage = app.costOfItemOnTheCartPage(app.itemFromCartPageWithName(item.getItemName()));
+        double costOnTheCartPage = app.costOfItemOnTheCartPage(app.itemFromCartPageWithName(item.getItemName()));
 
         assertEquals(quantityAfter, newQuantity);
         assertTrue(!quantityAfter.equals(quantityBefore));

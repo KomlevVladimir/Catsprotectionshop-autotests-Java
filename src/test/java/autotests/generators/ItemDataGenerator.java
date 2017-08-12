@@ -183,7 +183,7 @@ public class ItemDataGenerator {
                         itemName = "Spotty Pyramid Cat Bed";
                         break;
                     case 6:
-                        itemName = "Kumfy Kradle";
+                        itemName = "Festive Frenzies Reindeer Teaser";
                         break;
                     case 7:
                         itemName = "Gracie and Milly Catnip Cat Toys";

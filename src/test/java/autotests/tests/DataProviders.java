@@ -58,7 +58,7 @@ public class DataProviders {
         String quantity = itemGenerator.generateQuantity();
         String newQuantity = itemGenerator.generateQuantity();
         if (newQuantity.equals(quantity)) {
-            while (!newQuantity.equals(quantity)) {
+            if (newQuantity.equals(quantity)) {
                 newQuantity = itemGenerator.generateQuantity();
             }
         }

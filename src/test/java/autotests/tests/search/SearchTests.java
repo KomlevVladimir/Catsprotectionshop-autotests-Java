@@ -40,8 +40,8 @@ public class SearchTests extends TestBase {
     public void testSearchByPrice(String price, String words) {
         app.searchByPrice(price, words);
         List<ItemData> items = app.itemsFromSearchPage();
-        float priceFrom = app.priceFrom(price);
-        float priceUntil = app.priceUntil(price);
+        double priceFrom = app.priceFrom(price);
+        double priceUntil = app.priceUntil(price);
 
         for (ItemData item : items) {
             String itemPrice = substring(item.getPrice(), 1);
