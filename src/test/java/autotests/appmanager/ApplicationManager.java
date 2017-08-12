@@ -13,10 +13,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
@@ -43,18 +46,25 @@ public class ApplicationManager {
     }
 
     public void init() throws IOException {
-        switch (browser) {
-            case BrowserType.FIREFOX:
-                wd = new FirefoxDriver();
-                break;
+        if("".equals(properties.getProperty("selenium.server"))) {
+            switch (browser) {
+                case BrowserType.FIREFOX:
+                    wd = new FirefoxDriver();
+                    break;
 
-            case BrowserType.CHROME:
-                wd = new ChromeDriver();
-                break;
+                case BrowserType.CHROME:
+                    wd = new ChromeDriver();
+                    break;
 
-            case BrowserType.IE:
-                wd = new InternetExplorerDriver();
-                break;
+                case BrowserType.IE:
+                    wd = new InternetExplorerDriver();
+                    break;
+            }
+        } else {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(browser);
+            capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "linux")));
+            wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
 
         String target = System.getProperty("target", "local");

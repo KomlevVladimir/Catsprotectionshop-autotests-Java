@@ -56,7 +56,6 @@ public class SearchTests extends TestBase {
         List<ItemData> items = app.itemsFromSearchPage();
 
         Assert.assertTrue(items.size() == 0);
-
     }
 
 
